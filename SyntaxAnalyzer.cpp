@@ -9,10 +9,45 @@
     }
 
     bool SyntaxAnalyzer::stmtlist() {           // charles
-
+        if (stmt() == 1) {
+            while (stmt() == 1) {
+            }
+            return true;
+        }
+        else {
+            if ((tokitr != tokens.end()) && *tokitr == "s_lparent") {
+                //Null set
+                ++tokitr, ++lexitr;
+                return true;
+            }
+            return false;
+        }
     }
     int SyntaxAnalyzer::stmt() {                // ash
-
+            if(tokitr != tokens.end()){
+                if (*tokitr == "t_if"){
+                    tokitr++; lexitr++;
+                    return ifstmt();
+                }
+                else if (*tokitr == "t_while"){
+                    tokitr++; lexitr++;
+                    return whilestmt();
+                }
+                else if (*tokitr == "s_assign"){
+                    tokitr++; lexitr++;
+                    return assignstmt();
+                }
+                else if (*tokitr == "t_input"){
+                    tokitr++; lexitr++;
+                    return inputstmt();
+                }
+                else if (*tokitr == "t_output"){
+                    tokitr++; lexitr++;
+                    return outputstmt();
+                }
+            }
+            return false;
+        }
     }
     bool SyntaxAnalyzer::ifstmt(){              // andry
 
