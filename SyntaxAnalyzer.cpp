@@ -23,32 +23,34 @@
             return false;
         }
     }
+
     int SyntaxAnalyzer::stmt() {                // ash
-            if(tokitr != tokens.end()){
-                if (*tokitr == "t_if"){
-                    tokitr++; lexitr++;
-                    return ifstmt();
-                }
-                else if (*tokitr == "t_while"){
-                    tokitr++; lexitr++;
-                    return whilestmt();
-                }
-                else if (*tokitr == "s_assign"){
-                    tokitr++; lexitr++;
-                    return assignstmt();
-                }
-                else if (*tokitr == "t_input"){
-                    tokitr++; lexitr++;
-                    return inputstmt();
-                }
-                else if (*tokitr == "t_output"){
-                    tokitr++; lexitr++;
-                    return outputstmt();
-                }
+        if (tokitr != tokens.end()) {
+            if (*tokitr == "t_if") {
+                tokitr++;
+                lexitr++;
+                return ifstmt();
+            } else if (*tokitr == "t_while") {
+                tokitr++;
+                lexitr++;
+                return whilestmt();
+            } else if (*tokitr == "s_assign") {
+                tokitr++;
+                lexitr++;
+                return assignstmt();
+            } else if (*tokitr == "t_input") {
+                tokitr++;
+                lexitr++;
+                return inputstmt();
+            } else if (*tokitr == "t_output") {
+                tokitr++;
+                lexitr++;
+                return outputstmt();
             }
-            return false;
         }
+        return false;
     }
+
     bool SyntaxAnalyzer::ifstmt(){              // andry
 
     }
