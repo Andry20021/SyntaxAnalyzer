@@ -1,9 +1,14 @@
+//HEADER DOCUMENTATION: TODO
+
 #include <iostream>
 #include <vector>
 #include <map>
 using namespace std;
+#ifndef SYNTAXANALYZER_H
+#define SYNTAXANALYZER_H
+#endif //SYNTAXANALYZER_H
 
-class SyntaxAnalyzer{
+class SyntaxAnalyzer {
 private:
     vector<string> lexemes;
     vector<string> tokens;
@@ -11,16 +16,14 @@ private:
     vector<string>::iterator tokitr;
     // map of variables and their datatype
     // i.e. sum t_integer
-    map<string, string> symboltable; 
+    map<string, string> symboltable;
 
     // other private methods
-    // bool vdec();
-    // int vars();
-    int vdecassign (); // AA    // andry
-    bool stmtlist();  // AA     // charles
-    int stmt(); // AA           // ash
-    bool ifstmt(); // AA        // andry
-    bool elsepart(); // AA      // ash
+    int vdecassign ();    // andry
+    bool stmtlist();     // charles
+    int stmt();           // ash
+    bool ifstmt();        // andry
+    bool elsepart();      // ash
     bool whilestmt();           // charles
     bool assignstmt();          // ash
     bool inputstmt();           // andry
