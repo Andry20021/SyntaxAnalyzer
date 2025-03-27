@@ -1,9 +1,13 @@
 #include "SyntaxAnalyzer.h"
 
 
-    int SyntaxAnalyzer::vdecassign () {         // andry
-
+    bool SyntaxAnalyzer::vdecassign () {         // andry
+        if ( tokitr != tokens.end() && (*tokitr == "t_integer" || *tokitr == "t_string")) {
+            tokitr++; lexitr++;
+            return assignstmt();
+        }
     }
+
     bool SyntaxAnalyzer::stmtlist() {           // charles
 
     }

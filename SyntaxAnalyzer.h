@@ -19,7 +19,7 @@ private:
     map<string, string> symboltable;
 
     // other private methods
-    int vdecassign ();          // andry
+    bool vdecassign ();          // andry
     bool stmtlist();            // charles
     int stmt();                 // ash
     bool ifstmt();              // andry
