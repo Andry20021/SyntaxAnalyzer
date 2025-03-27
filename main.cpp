@@ -1,4 +1,7 @@
-
+#include <iostream>
+#include <vector>
+#include <map>
+using namespace std;
 
 class SyntaxAnalyzer{
 private:
@@ -13,21 +16,21 @@ private:
     // other private methods
     // bool vdec();
     // int vars();
-    int vdecassign (); // AA
-    bool stmtlist();  // AA
-    int stmt(); // AA
-    bool ifstmt(); // AA
-    bool elsepart(); // AA
-    bool whilestmt();
-    bool assignstmt();
-    bool inputstmt();
-    bool outputstmt();
-    bool expr();
-    bool simpleexpr();
-    bool term();
-    bool logicop();
-    bool arithop();
-    bool relop();
+    int vdecassign (); // AA    // andry
+    bool stmtlist();  // AA     // charles
+    int stmt(); // AA           // ash
+    bool ifstmt(); // AA        // andry
+    bool elsepart(); // AA      // ash
+    bool whilestmt();           // charles
+    bool assignstmt();          // ash
+    bool inputstmt();           // andry
+    bool outputstmt();          // charles
+    bool expr();                // andry
+    bool simpleexpr();          // ash
+    bool term();                // charles
+    bool logicop();             // andry
+    bool arithop();             // charles
+    bool relop();               // ash
 
 public:
     SyntaxAnalyzer(istream& infile);
