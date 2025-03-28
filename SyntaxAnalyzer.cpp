@@ -100,16 +100,16 @@ bool SyntaxAnalyzer::outputstmt() {
     // charles
     if (tokitr != tokens.end() && *tokitr == "t_output") {
         ++tokitr, ++lexitr;
-        if (tokitr != tokens.end() && *tokitr == "t_rbrace") {
+        if (tokitr != tokens.end() && *tokitr == "s_rbrace") {
             ++tokitr, ++lexitr;
             if (tokitr != tokens.end()) {
                 if (*tokitr == "t_text") {
                     ++tokitr, ++lexitr;
-                    if (tokitr != tokens.end() && *tokitr == "t_rparent") {
+                    if (tokitr != tokens.end() && *tokitr == "s_rparen") {
                         return true;
                     }
                 } else if (expr()) {
-                    if (tokitr != tokens.end() && *tokitr == "t_rparent") {
+                    if (tokitr != tokens.end() && *tokitr == "s_rparen") {
                         return true;
                     }
                 }
