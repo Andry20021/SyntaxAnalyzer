@@ -4,8 +4,8 @@
     bool SyntaxAnalyzer::vdecassign () {         // andry
         if ( tokitr != tokens.end() && (*tokitr == "t_integer" || *tokitr == "t_string")) {
             tokitr++; lexitr++;
-            return assignstmt();
         }
+        return assignstmt();
     }
 
     bool SyntaxAnalyzer::stmtlist() {           // charles
@@ -47,7 +47,24 @@
     }
 
     bool SyntaxAnalyzer::ifstmt(){              // andry
-
+    	if (tokitr != tokens.end() && *tokitr == "s_lparen") {
+        	tokitr++; lexitr++;
+        	if (expr()) {
+            	if (tokitr != tokens.end() && *tokitr == "s_rparen") {
+                	tokitr++; lexitr++;
+                	if (tokitr != tokens.end() && *tokitr == "s_lbrace") {
+                    	tokitr++; lexitr++;
+                    	if (stmtlist()) {
+                        	if (tokitr != tokens.end() && *tokitr == "s_rbrace") {
+                            	tokitr++; lexitr++;
+                            	return elsepart();
+                        	}
+                    	}
+                	}
+            	}
+        	}
+      	}
+		return false;
     }
 
     bool SyntaxAnalyzer::elsepart(){            // ash
@@ -110,7 +127,19 @@
 	}
 
     bool SyntaxAnalyzer::inputstmt(){           // andry
-
+      	if (tokitr != tokens.end() && *tokitr == "t_input") {
+          	if (tokitr != tokens.end() && *tokitr == "s_lparen") {
+        		tokitr++; lexitr++;
+        		if (tokitr != tokens.end() && *tokitr == "s_id") {
+            		tokitr++; lexitr++;
+            		if (tokitr != tokens.end() && *tokitr == "s_rparen") {
+                		tokitr++; lexitr++;
+                		return true;
+            		}
+        		}
+    		}
+      	}
+        return false;
     }
 
     bool SyntaxAnalyzer::outputstmt(){          // charles
@@ -136,7 +165,16 @@
     }
 
     bool SyntaxAnalyzer::expr(){                // andry
-
+		if (simpleexpr()) {
+        	if (logicop()) {
+            	if (simpleexpr()) {
+                	return true;
+            	}
+            	return false;
+        	}
+        	return true;
+    	}
+    	return false;
     }
 
     bool SyntaxAnalyzer::simpleexpr(){          // ash
@@ -170,8 +208,15 @@
     }
 
     bool SyntaxAnalyzer::logicop(){             // andry
-
+		if (tokitr != tokens.end()) {
+        	if (*tokitr == "t_and" || *tokitr == "t_or") {
+            	tokitr++; lexitr++;
+            	return true;
+        	}
+		}
+        return false;
     }
+
 
     bool SyntaxAnalyzer::arithop(){             // charles
 	//Doing +, -, and *.
