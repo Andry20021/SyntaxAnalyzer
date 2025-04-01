@@ -46,7 +46,7 @@
         return false;
     }
 
-    bool SyntaxAnalyzer::ifstmt(){              // andry
+    bool SyntaxAnalyzer::ifstmt() {              // andry
     	if (tokitr != tokens.end() && *tokitr == "s_lparen") {
         	tokitr++; lexitr++;
         	if (expr()) {
@@ -127,19 +127,17 @@
 	}
 
     bool SyntaxAnalyzer::inputstmt(){           // andry
-      	if (tokitr != tokens.end() && *tokitr == "t_input") {
-          	if (tokitr != tokens.end() && *tokitr == "s_lparen") {
-        		tokitr++; lexitr++;
-        		if (tokitr != tokens.end() && *tokitr == "t_id") {
-            		tokitr++; lexitr++;
-            		if (tokitr != tokens.end() && *tokitr == "s_rparen") {
-                		tokitr++; lexitr++;
-                		return true;
-            		}
-        		}
-    		}
-      	}
-        return false;
+    	if (tokitr != tokens.end() && *tokitr == "s_lparen") {
+        	tokitr++; lexitr++;
+        	if (tokitr != tokens.end() && *tokitr == "t_id") {
+            	tokitr++; lexitr++;
+            	if (tokitr != tokens.end() && *tokitr == "s_rparen") {
+                	tokitr++; lexitr++;
+                	return true;
+            	}
+        	}
+    	}
+    	return false;
     }
 
     bool SyntaxAnalyzer::outputstmt(){          // charles
