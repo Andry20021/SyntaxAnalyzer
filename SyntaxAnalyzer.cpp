@@ -32,7 +32,7 @@
             } else if (*tokitr == "t_while") {
                 tokitr++; lexitr++;
                 return whilestmt();
-            } else if (*tokitr == "s_id") {
+            } else if (*tokitr == "t_id") {
                 tokitr++; lexitr++;
                 return assignstmt();
             } else if (*tokitr == "t_input") {
@@ -112,7 +112,7 @@
 
     bool SyntaxAnalyzer::assignstmt(){          // ash
 		while (tokitr != tokens.end()) {
-			if (*tokitr == "s_id") {
+			if (*tokitr == "t_id") {
 				tokitr++; lexitr++;
 				if (*tokitr == "s_assign") {
 					tokitr++; lexitr++;
@@ -130,7 +130,7 @@
       	if (tokitr != tokens.end() && *tokitr == "t_input") {
           	if (tokitr != tokens.end() && *tokitr == "s_lparen") {
         		tokitr++; lexitr++;
-        		if (tokitr != tokens.end() && *tokitr == "s_id") {
+        		if (tokitr != tokens.end() && *tokitr == "t_id") {
             		tokitr++; lexitr++;
             		if (tokitr != tokens.end() && *tokitr == "s_rparen") {
                 		tokitr++; lexitr++;
