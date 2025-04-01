@@ -59,6 +59,8 @@
             } else if (*tokitr == "t_output") {
                 tokitr++; lexitr++;
                 return outputstmt();
+            } else if (*tokitr == "t_number" || *tokitr == "t_string") {
+              	return vdecassign();
             }
         }
         return false;
