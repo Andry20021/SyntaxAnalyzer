@@ -148,11 +148,13 @@
     	if (tokitr != tokens.end() && *tokitr == "s_lparen") {
         	tokitr++; lexitr++;
         	if (tokitr != tokens.end() && *tokitr == "t_id") {
-            	tokitr++; lexitr++;
-            	if (tokitr != tokens.end() && *tokitr == "s_rparen") {
+                if (tableCheck()) {
                 	tokitr++; lexitr++;
-                	return true;
-            	}
+            		if (tokitr != tokens.end() && *tokitr == "s_rparen") {
+                		tokitr++; lexitr++;
+                		return true;
+            		}
+                }
         	}
     	}
     	return false;
