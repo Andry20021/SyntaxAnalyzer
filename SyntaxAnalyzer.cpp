@@ -180,15 +180,12 @@
     bool SyntaxAnalyzer::simpleexpr(){          // ash
 		while (tokitr != tokens.end()) {
 			if (term()) {
-				tokitr++; lexitr++;
 				if (arithop() || relop()) {
-					tokitr++; lexitr++;
 					if (term()) {
-						tokitr++; lexitr++;
 						return true;
 					}
+                    return false;
 				}
-				tokitr++; lexitr++;
 			}
 			return true;
 		}
