@@ -59,7 +59,7 @@
             } else if (*tokitr == "t_output") {
                 tokitr++; lexitr++;
                 return outputstmt();
-            } else if (*tokitr == "t_number" || *tokitr == "t_string") {
+            } else if (*tokitr == "t_integer" || *tokitr == "t_string") {
               	return vdecassign();
             }
         }
