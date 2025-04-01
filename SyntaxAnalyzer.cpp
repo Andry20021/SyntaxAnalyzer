@@ -16,9 +16,12 @@
           	string t = *tokitr;
             tokitr++; lexitr++;
         	if ( tokitr != tokens.end() && *tokitr == "t_id") {
-        		if (tableCheck()) {
+        		if (!tableCheck()) {
         			symboltable.insert({*lexitr , t});
         		}
+                else {
+                	return false; 
+                }
         	}
         }
         return assignstmt();
