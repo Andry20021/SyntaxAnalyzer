@@ -15,10 +15,11 @@
         if ( tokitr != tokens.end() && (*tokitr == "t_integer" || *tokitr == "t_string")) {
           	string t = *tokitr;
             tokitr++; lexitr++;
-            if ( tokitr != tokens.end() && *tokitr == "t_id") {
-              tableCheck();
-              symboltable.insert({*lexitr , t});
-            }
+        	if ( tokitr != tokens.end() && *tokitr == "t_id") {
+        		if (tableCheck()) {
+        			symboltable.insert({*lexitr , t});
+        		}
+        	}
         }
         return assignstmt();
     }
