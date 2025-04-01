@@ -34,7 +34,7 @@
             return true;
         }
         else {
-            if ((tokitr != tokens.end()) && *tokitr == "s_lparent") {
+            if ((tokitr != tokens.end()) && *tokitr == "s_lparen") {
                 //Null set
                 ++tokitr, ++lexitr;
                 return true;
@@ -160,27 +160,25 @@
     	return false;
     }
 
-    bool SyntaxAnalyzer::outputstmt(){          // charles
-		if (tokitr != tokens.end() && *tokitr == "t_output") {
-         	++tokitr, ++lexitr;
-         	if (tokitr != tokens.end() && *tokitr == "s_rbrace") {
-             	++tokitr, ++lexitr;
-             	if (tokitr != tokens.end()) {
-                 	if (*tokitr == "t_text") {
-                     	++tokitr, ++lexitr;
-                     	if (tokitr != tokens.end() && *tokitr == "s_rparen") {
-                         	return true;
-                     	}
-                 	} else if (expr()) {
-                     	if (tokitr != tokens.end() && *tokitr == "s_rparen") {
-                         	return true;
-                     	}
-                 	}
-             	}
-         	}
-     	}
+	bool SyntaxAnalyzer::outputstmt() {
+		// charles
+		if (tokitr != tokens.end() && *tokitr == "s_lparen") {
+			++tokitr, ++lexitr;
+			if (tokitr != tokens.end()) {
+				if (*tokitr == "t_text") {
+					++tokitr, ++lexitr;
+					if (tokitr != tokens.end() && *tokitr == "s_rparen") {
+						return true;
+					}
+				} else if (expr()) {
+					if (tokitr != tokens.end() && *tokitr == "s_rparen") {
+						return true;
+					}
+				}
+			}
+		}
      	return false;
-    }
+	}
 
     bool SyntaxAnalyzer::expr(){                // andry
 		if (simpleexpr()) {
