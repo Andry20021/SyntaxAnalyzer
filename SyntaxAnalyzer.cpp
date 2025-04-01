@@ -1,14 +1,25 @@
 #include "SyntaxAnalyzer.h"
 
+	bool SyntaxAnalyzer::tableCheck() {
+		//Checks to make sure that the resulting id from tokitr is already stored into the table
+		if (tokitr != tokens.end() && *tokitr == "t_id") {
+			if (lexitr != tokens.end() && symboltable.find(*lexitr) != symboltable.end() ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 
     bool SyntaxAnalyzer::vdecassign () {         // andry
         if ( tokitr != tokens.end() && (*tokitr == "t_integer" || *tokitr == "t_string")) {
           	string t = *tokitr;
             tokitr++; lexitr++;
-            if ( tokitr != tokens.end() && *tokitr == "t_id") {
-              tableCheck();
-              symboltable.insert({*lexitr , t});
-            }
+        	if ( tokitr != tokens.end() && *tokitr == "t_id") {
+        		if (tableCheck()) {
+        			symboltable.insert({*lexitr , t});
+        		}
+        	}
         }
         return assignstmt();
     }
