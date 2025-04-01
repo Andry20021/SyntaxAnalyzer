@@ -3,7 +3,12 @@
 
     bool SyntaxAnalyzer::vdecassign () {         // andry
         if ( tokitr != tokens.end() && (*tokitr == "t_integer" || *tokitr == "t_string")) {
+          	string t = *tokitr;
             tokitr++; lexitr++;
+            if ( tokitr != tokens.end() && *tokitr == "t_id") {
+              tableCheck();
+              symboltable.insert({*lexitr , t});
+            }
         }
         return assignstmt();
     }
