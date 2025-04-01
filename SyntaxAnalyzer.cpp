@@ -208,17 +208,31 @@
 		return false;
 	}
 
-    bool SyntaxAnalyzer::term(){                // charles
+	bool SyntaxAnalyzer::term(){                // charles
 		if (tokitr != tokens.end()) {
-         	if (*tokitr == "t_text" || *tokitr == "t_number" || *tokitr == "t_id") {
-             	++tokitr, ++lexitr;
-             	return true;
-         	} else if (expr()) {
-             	return true;
-         	}
-     	}
-     	return false;
-    }
+			if (*tokitr == "t_text" || *tokitr == "t_number") {
+				++tokitr, ++lexitr;
+				return true;
+			}
+			if (*tokitr == "t_id") {
+				if (tableCheck()) { //variable is defined in symbol table
+					++tokitr++; lexitr++;
+					return true;
+				}
+				return false;
+			}
+			if (*tokitr == "s_lparen") {
+				++tokitr; ++lexitr;
+				if (expr()) {
+					if (tokitr != tokens.end() && *tokitr == "s_rparen") {
+						++tokitr; ++lexitr;
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
 
     bool SyntaxAnalyzer::logicop(){             // andry
 		if (tokitr != tokens.end()) {
