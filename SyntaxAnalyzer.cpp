@@ -38,7 +38,6 @@
                 tokitr++; lexitr++;
                 return whilestmt();
             } else if (*tokitr == "t_id") {
-                tokitr++; lexitr++;
                 return assignstmt();
             } else if (*tokitr == "t_input") {
                 tokitr++; lexitr++;
