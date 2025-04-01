@@ -130,7 +130,7 @@
 
     bool SyntaxAnalyzer::assignstmt(){          // ash
 		while (tokitr != tokens.end()) {
-			if (*tokitr == "t_id") {
+            if (tableCheck()){
 				tokitr++; lexitr++;
 				if (*tokitr == "s_assign") {
 					tokitr++; lexitr++;
@@ -138,7 +138,7 @@
 						tokitr++; lexitr++;
 						return true;
 					}
-				}
+                }
 			}
 		}
 		return false;
