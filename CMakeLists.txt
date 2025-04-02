@@ -3,4 +3,6 @@ project(SyntaxAnalyzer)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(SyntaxAnalyzer main.cpp)
+add_executable(SyntaxAnalyzer SyntaxAnalyzer.cpp SyntaxAnalyzer.h
+        main.cpp
+)

@@ -274,3 +274,52 @@
 		}
 		return false;
 	}
+
+SyntaxAnalyzer::SyntaxAnalyzer(istream &infile) {
+		//Charles
+		string data;
+		while (getline(infile, data)) {
+			int i = 0;
+			bool found = false;
+			while (i < data.length() && !found) {
+				if (data[i] == ':') {
+					found = true;
+				}
+				i++;
+			}
+			tokens.push_back(data.substr(0, i - 2));
+			lexemes.push_back(data.substr(i + 1, data.length()));
+		}
+		tokitr = tokens.begin();
+		lexitr = lexemes.begin();
+	}
+
+bool SyntaxAnalyzer::parse() {
+		if (tokitr != tokens.end() && *tokitr == "t_main") {
+			++tokitr, ++lexitr;
+			if (tokitr != tokens.end() && *tokitr == "s_lbrace") {
+				++tokitr, ++lexitr;
+				if (stmtlist()) {
+					if (tokitr != tokens.end() && *tokitr == "s_rbrace") {
+						++tokitr, ++lexitr;
+						if (tokitr == tokens.end()) {
+							cout << "Variables: " << endl;
+							for (const auto& pair : symboltable) {
+								std::cout << "Name: " << pair.first << ", Datatype: " << pair.second << std::endl;
+							}
+							return true;
+						}
+					}
+				}
+			}
+		}
+		auto num = distance(tokens.begin(), tokitr) + 1;
+		if (tokitr != tokens.end()) {
+			cout << "ERROR: " << *tokitr << " " << *lexitr << " is invalid ";
+			cout << "on line " << num << endl;
+		}
+		else {
+			cout << "ERROR: EOF when reading program on line " << num << endl;
+		}
+		return false;
+	}

@@ -37,7 +37,7 @@ private:
     bool relop();               // ash
 
 public:
-    SyntaxAnalyzer(istream& infile);
+    SyntaxAnalyzer(istream& infile); //charles
     // pre: 1st parameter consists of an open file containing a source code's
     //	valid scanner/lexical analyzer output.  This data must be in the form: token : lexeme
     // post: the vectors have been populated
