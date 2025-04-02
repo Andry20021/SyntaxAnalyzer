@@ -12,19 +12,15 @@
 
 
     bool SyntaxAnalyzer::vdecassign () {         // andry
-        if ( tokitr != tokens.end() && (*tokitr == "t_integer" || *tokitr == "t_string")) {
-          	string t = *tokitr;
-            tokitr++; lexitr++;
-        	if ( tokitr != tokens.end() && *tokitr == "t_id") {
-        		if (!tableCheck()) {
-        			symboltable.insert({*lexitr , t});
-        		}
-                else {
-                	return false; 
-                }
-        	}
-        }
-        return assignstmt();
+		string t = *tokitr;
+		tokitr++; lexitr++;
+		if ( tokitr != tokens.end() && *tokitr == "t_id") {
+			if (!tableCheck()) {
+				symboltable.insert({*lexitr , t});
+			}
+			return assignstmt();
+		}
+		return false;
     }
 
     bool SyntaxAnalyzer::stmtlist() {           // charles
