@@ -88,21 +88,18 @@
     }
 
     bool SyntaxAnalyzer::elsepart(){            // ash
-		while (tokitr != tokens.end()) {
-			if (*tokitr == "t_else") {
-                tokitr++; lexitr++;
-			if (*tokitr == "s_lbrace") {
+		if (*tokitr == "t_else" && tokitr != tokens.end()) {
+            tokitr++; lexitr++;
+			if (*tokitr == "s_lbrace" && tokitr != tokens.end()) {
               		tokitr++; lexitr++;
-				if (stmtlist()) {
-                		tokitr++; lexitr++;
-						if (*tokitr == "s_rbrace") {
-				    		tokitr++; lexitr++;
-							return true;
-						}
+				if (stmtlist() && tokitr != tokens.end()) {
+                	tokitr++; lexitr++;
+					if (*tokitr == "s_rbrace" && tokitr != tokens.end()) {
+			    		tokitr++; lexitr++;
+						return true;
 					}
 				}
 			}
-			tokitr++; lexitr++;
 			return true;
 		}
 		return false;
@@ -131,15 +128,16 @@
  	}
 
     bool SyntaxAnalyzer::assignstmt(){          // ash
-		while (tokitr != tokens.end()) {
-            if (tableCheck()){
+        if (tableCheck()){
+			tokitr++; lexitr++;
+			if (*tokitr == "s_assign" && tokitr != tokens.end()) {
 				tokitr++; lexitr++;
-				if (*tokitr == "s_assign") {
+				if (expr() && tokitr != tokens.end()) {
 					tokitr++; lexitr++;
-					if (expr()) {
-						tokitr++; lexitr++;
-						return true;
-					}
+                    if (*tokitr == "s_semi") {
+                      	tokitr++; lexitr++;
+                    	return true;
+                    }
                 }
 			}
 		}
@@ -196,14 +194,12 @@
     }
 
     bool SyntaxAnalyzer::simpleexpr(){          // ash
-		while (tokitr != tokens.end()) {
-			if (term()) {
-				if (arithop() || relop()) {
-					if (term()) {
-						return true;
-					}
-                    return false;
+		if (term() && tokitr != tokens.end()) {
+			if ((arithop() || relop()) && tokitr != tokens.end()) {
+				if (term() && tokitr != tokens.end()) {
+					return true;
 				}
+                return false;
 			}
 			return true;
 		}
