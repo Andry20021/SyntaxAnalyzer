@@ -1,6 +1,7 @@
 #include "SyntaxAnalyzer.h"
 
 	bool SyntaxAnalyzer::tableCheck() {
+		//Charles, Ashley, Andry
 		//Checks to make sure that the resulting id from tokitr is already stored into the table
 		if (tokitr != tokens.end() && *tokitr == "t_id") {
 			if (lexitr != tokens.end() && symboltable.find(*lexitr) != symboltable.end() ) {
@@ -9,7 +10,6 @@
 		}
 		return false;
 	}
-
 
     bool SyntaxAnalyzer::vdecassign () {         // andry
 		string t = *tokitr;
@@ -294,6 +294,7 @@ SyntaxAnalyzer::SyntaxAnalyzer(istream &infile) {
 	}
 
 bool SyntaxAnalyzer::parse() {
+		//Charles, Ashley
 		if (tokitr != tokens.end() && *tokitr == "t_main") {
 			++tokitr, ++lexitr;
 			if (tokitr != tokens.end() && *tokitr == "s_lbrace") {
@@ -302,10 +303,6 @@ bool SyntaxAnalyzer::parse() {
 					if (tokitr != tokens.end() && *tokitr == "s_rbrace") {
 						++tokitr, ++lexitr;
 						if (tokitr == tokens.end()) {
-							cout << "Variables: " << endl;
-							for (const auto& pair : symboltable) {
-								std::cout << "Name: " << pair.first << ", Datatype: " << pair.second << std::endl;
-							}
 							return true;
 						}
 					}

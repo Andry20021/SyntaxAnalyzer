@@ -1,4 +1,8 @@
-//HEADER DOCUMENTATION: TODO
+//CSC4450 - HW 5 - Syntax Analyzer
+//Charles Eubanks, Andry Astorga, Ashley Czerniak
+//Reads a file of valid tokens/lexemes, checks the syntax against a set of specified grammar rules,
+//and creates a table of all of the variables defined in the given input file.
+
 
 #include <iostream>
 #include <vector>
