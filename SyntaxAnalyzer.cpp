@@ -29,12 +29,18 @@
 
     bool SyntaxAnalyzer::stmtlist() {           // charles
         if (stmt() == 1) {
-            while (stmt() == 1) {
+			auto prev = tokitr;
+        	while (stmt() == 1) {
+        		prev = tokitr;
             }
+        	if (prev != tokitr) {
+        		return false;
+        	}
             return true;
         }
         else {
-            if ((tokitr != tokens.end()) && *tokitr == "s_lparen") {
+            if ((tokitr != tokens.end()) && *tokitr == "s_rbrace") {
+            	//TODO: Refix this :(
                 //Null set
                 ++tokitr, ++lexitr;
                 return true;
@@ -93,7 +99,6 @@
 			if (*tokitr == "s_lbrace" && tokitr != tokens.end()) {
               		tokitr++; lexitr++;
 				if (stmtlist() && tokitr != tokens.end()) {
-                	tokitr++; lexitr++;
 					if (*tokitr == "s_rbrace" && tokitr != tokens.end()) {
 			    		tokitr++; lexitr++;
 						return true;
@@ -131,9 +136,9 @@
         if (tableCheck()){
 			tokitr++; lexitr++;
 			if (*tokitr == "s_assign" && tokitr != tokens.end()) {
+				//TODO: tokens.end check should be first, not last!
 				tokitr++; lexitr++;
 				if (expr() && tokitr != tokens.end()) {
-					tokitr++; lexitr++;
                     if (*tokitr == "s_semi") {
                       	tokitr++; lexitr++;
                     	return true;
