@@ -36,9 +36,7 @@
         }
         else {
             if ((tokitr != tokens.end()) && *tokitr == "s_rbrace") {
-            	//TODO: Refix this :(
                 //Null set
-                ++tokitr, ++lexitr;
                 return true;
             }
             return false;
