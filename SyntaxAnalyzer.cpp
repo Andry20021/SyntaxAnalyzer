@@ -1,7 +1,7 @@
 #include "SyntaxAnalyzer.h"
 
 	bool SyntaxAnalyzer::tableCheck() {
-		//Charles, Ashley, Andry
+		//Charles, Ash, Andry
 		//Checks to make sure that the resulting id from tokitr is already stored into the table
 		if (tokitr != tokens.end() && *tokitr == "t_id") {
 			if (lexitr != tokens.end() && symboltable.find(*lexitr) != symboltable.end() ) {
@@ -88,12 +88,12 @@
     }
 
     bool SyntaxAnalyzer::elsepart(){            // ash
-		if (*tokitr == "t_else" && tokitr != tokens.end()) {
+		if (tokitr != tokens.end() && *tokitr == "t_else") {
             tokitr++; lexitr++;
-			if (*tokitr == "s_lbrace" && tokitr != tokens.end()) {
+			if (tokitr != tokens.end() && *tokitr == "s_lbrace") {
               		tokitr++; lexitr++;
-				if (stmtlist() && tokitr != tokens.end()) {
-					if (*tokitr == "s_rbrace" && tokitr != tokens.end()) {
+				if (tokitr != tokens.end() && stmtlist()) {
+					if (tokitr != tokens.end() && *tokitr == "s_rbrace") {
 			    		tokitr++; lexitr++;
 						return true;
 					}
@@ -129,10 +129,9 @@
     bool SyntaxAnalyzer::assignstmt(){          // ash
         if (tableCheck()){
 			tokitr++; lexitr++;
-			if (*tokitr == "s_assign" && tokitr != tokens.end()) {
-				//TODO: tokens.end check should be first, not last!
+			if (tokitr != tokens.end() && *tokitr == "s_assign") {
 				tokitr++; lexitr++;
-				if (expr() && tokitr != tokens.end()) {
+				if (tokitr != tokens.end() && expr()) {
                     if (*tokitr == "s_semi") {
                       	tokitr++; lexitr++;
                     	return true;
@@ -193,9 +192,9 @@
     }
 
     bool SyntaxAnalyzer::simpleexpr(){          // ash
-		if (term() && tokitr != tokens.end()) {
-			if ((arithop() || relop()) && tokitr != tokens.end()) {
-				if (term() && tokitr != tokens.end()) {
+		if (tokitr != tokens.end() && term()) {
+			if (tokitr != tokens.end() && (arithop() || relop())) {
+				if (tokitr != tokens.end() && term()) {
 					return true;
 				}
                 return false;
@@ -294,7 +293,7 @@ SyntaxAnalyzer::SyntaxAnalyzer(istream &infile) {
 	}
 
 bool SyntaxAnalyzer::parse() {
-		//Charles, Ashley
+		//Charles, Ash
 		if (tokitr != tokens.end() && *tokitr == "t_main") {
 			++tokitr, ++lexitr;
 			if (tokitr != tokens.end() && *tokitr == "s_lbrace") {
